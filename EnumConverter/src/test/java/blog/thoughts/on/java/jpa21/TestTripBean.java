@@ -1,5 +1,7 @@
 package blog.thoughts.on.java.jpa21;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import junit.framework.Assert;
@@ -35,12 +37,25 @@ public class TestTripBean {
 	}
 
 	@Test
-	public void createSquare() {
+	public void createTrip() {
 		Trip trip = new Trip();
 		trip.setDestination("Dresden");
 		trip.setVehicle(Vehicle.CAR);
 
 		this.tripBean.createTrip(trip);
 		Assert.assertNotNull(trip.getId());
+	}
+
+	@Test
+	public void findByVehicle() {
+		Trip trip = new Trip();
+		trip.setDestination("Berlin");
+		trip.setVehicle(Vehicle.BUS);
+		this.tripBean.createTrip(trip);
+
+		List<Trip> trips = this.tripBean.findTripsByVehicle(Vehicle.BUS);
+		if (trips.isEmpty()) {
+			Assert.fail();
+		}
 	}
 }

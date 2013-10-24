@@ -4,9 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 import blog.thoughts.on.java.jpa21.enums.Vehicle;
 
+@NamedQueries(@NamedQuery(name = "Trip.findByVehicle", query = "SELECT trip FROM Trip trip WHERE vehicle=:vehicle"))
 @Entity
 public class Trip {
 
